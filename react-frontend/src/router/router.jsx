@@ -96,7 +96,7 @@ const router = createBrowserRouter([
             {
                 path: 'tdc-examination',
                 element: <QuizSection />
-            }
+            },
         ]
     },
 

@@ -54,7 +54,7 @@ const Navbar = () => {
   };
 
   const handleUserSettings = () => {
-    navigate('/user-settings');
+    navigate('/authstudent/user-setting');
   };
 
   return (

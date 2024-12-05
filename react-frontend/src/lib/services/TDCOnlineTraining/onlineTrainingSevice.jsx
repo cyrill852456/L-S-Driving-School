@@ -20,3 +20,17 @@ export const startExam = async () => {
         throw error;
     }
 };
+
+export const updateUserAccount = async (userData) => {
+    try {
+        const response = await axiosInstance.post(`${BASE_URL}/update-account`, {
+            currentPassword: userData.currentPassword,
+            newPassword: userData.newPassword
+        });
+        return response.data;
+    }
+    catch (error) {
+        console.error('Update User Account Error', error.message);
+        throw error;
+    }
+}

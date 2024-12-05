@@ -50,6 +50,7 @@ Route::post('/validator-book-enrollment',[BookingEnrollmentController::class, 'v
 Route::middleware(['auth:sanctum','role:student'])->group(function(){
     Route::get('/get-auth-user', [AuthController::class, 'getProfile']);
     Route::post('/start-lecture', [TDCOnlineController::class, 'startExam']);
+    Route::post('/update-account', [TDCOnlineController::class, 'updateAccount']);
 });
 
 

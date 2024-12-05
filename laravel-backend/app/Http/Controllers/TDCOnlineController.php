@@ -33,4 +33,36 @@ class TDCOnlineController extends Controller
             ], 500);
         }
     }
+
+    // update user account
+    public function updateAccount(Request $request){
+
+        $user = Auth::user();
+           // Validate the request
+           $request->validate([
+            'current_password' => 'required_with:new_password',
+            'new_password' => 'nullable|min:8',
+        ]);
+
+
+             // Handle password change
+            if ($request->filled('newPassword')) {
+                // Verify current password
+                if (!Hash::check($request->currentPassword, $user->password)) {
+                    throw ValidationException::withMessages([
+                        'currentPassword' => ['The current password is incorrect.'],
+                    ]);
+                }
+
+                // Update password
+                $user->password = Hash::make($request->newPassword);
+            }
+
+            $user->save();
+    
+            return response()->json([
+                'message' => 'Profile updated successfully',
+                'user' => $user
+            ]);
+    }
 }
