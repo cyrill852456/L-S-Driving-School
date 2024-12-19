@@ -11,6 +11,7 @@ export const getCsrfToken = async () => {
     }
 };
 
+// Update Status
 export const startExam = async () => {
     try {
         const response = await axiosInstance.post(`${BASE_URL}/start-lecture`);
@@ -21,6 +22,7 @@ export const startExam = async () => {
     }
 };
 
+/// Update User Account
 export const updateUserAccount = async (userData) => {
     try {
         const response = await axiosInstance.post(`${BASE_URL}/update-account`, {
@@ -32,5 +34,16 @@ export const updateUserAccount = async (userData) => {
     catch (error) {
         console.error('Update User Account Error', error.message);
         throw error;
+    }
+}
+
+// Saved Score
+export const savedScore = async (data) =>{
+    try {
+        const response = await axiosInstance.post(`${BASE_URL}/saved-score-session1`, data);
+        return response.data;
+    } catch (error) {
+        console.error('Error saving quiz score:', error.message);
+        throw new Error('Failed to save quiz score');
     }
 }

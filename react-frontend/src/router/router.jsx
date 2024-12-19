@@ -22,6 +22,7 @@ import TDCBooking from '@/Pages/ClientPage/Enrollments/TDCBookingEnrollments'
 import PDCBooking from '@/Pages/ClientPage/Enrollments/PDCEnrollments';
 import MDCBooking from '@/Pages/ClientPage/Enrollments/MDCEnrollments';
 import UserSetting from "@/Pages/ClientPage/UserSetting";
+import UploadVideo from "@/Pages/Admin/UploadVideo";
 const router = createBrowserRouter([
    
     {
@@ -124,6 +125,10 @@ const router = createBrowserRouter([
             {
                 path: 'Booking-enrollment-request',
                 element: <BookingEnrollment />
+            },
+            {
+                path: 'upload-video',
+                element: <UploadVideo />
             }
         ]
 

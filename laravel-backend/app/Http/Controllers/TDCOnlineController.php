@@ -65,4 +65,34 @@ class TDCOnlineController extends Controller
                 'user' => $user
             ]);
     }
+
+    public function saveQuizScore(Request $request){
+        try {
+            $request->validate([
+                'score' => 'required|numeric'
+            ]);
+
+            $user = Auth::user();
+            
+            // If this score is better than previous, update it
+            if (!$user->score || $request->score > $user->score) {
+                $user->score = $request->score;
+                $user->save();
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Score saved successfully',
+                'data' => [
+                    'score' => $user->score
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to save score'
+            ], 500);
+        }
+    }
 }

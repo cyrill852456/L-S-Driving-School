@@ -22,7 +22,8 @@ import {
   Menu,
   Loader2,
   Users,
-  GraduationCap
+  GraduationCap,
+  HardDriveUpload
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { getAdmin, logoutUser } from '@/lib/services/authservices';
@@ -98,6 +99,12 @@ function DefaultLayouts() {
           description: 'Handle digital course registrations',
           icon: GraduationCap,
           href: 'online-enrollment-request'
+        },
+        {
+          name: 'Upload Video TDC',
+          description: 'Upload Video',
+          icon: HardDriveUpload,
+          href: 'upload-video'
         }
       ]
     },

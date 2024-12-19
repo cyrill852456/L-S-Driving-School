@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\EnrollmentCredentialsMail;
+use App\Models\TDCVideo;
+use Illuminate\Support\Facades\Storage;
 class AdminController extends Controller
 {
 
@@ -164,6 +166,62 @@ class AdminController extends Controller
             'message' => 'Course deleted successfully'
         ]);
     }
+
+
+    public function uploadVideo(Request $request){
+
+        $request->validate([
+            'video' => 'required|file|mimetypes:video/mp4,video/mpeg,video/quicktime|max:500000', // 500MB max
+            'title' => 'required|string|max:255',
+            'session' => 'required|string|max:255',
+            'description' => 'nullable|string|max:1000',
+            'instructor' => 'required|string|max:255'
+        ]);
+
+        
+        try {
+            // Get the uploaded file
+            $videoFile = $request->file('video');
+            
+            // Generate a unique filename
+            $filename = Str::uuid() . '.' . $videoFile->getClientOriginalExtension();
+            
+            // Store the file in the videos directory
+            $filepath = $videoFile->storeAs('videos', $filename, 'public');
+
+            // Get video duration (you might need to use FFmpeg for accurate duration)
+            $duration = $this->getVideoDuration($videoFile);
+
+            // Create video record in database
+            $video = TDCVideo::create([
+                'title' => $request->input('title'),
+                'session' => $request->input('session'),
+                'description' => $request->input('description'),
+                'filename' => $filename,
+                'filepath' => $filepath,
+                'video_url' => Storage::url($filepath),
+                'duration' => $duration,
+                'instructor' => $request->input('instructor')
+            ]);
+
+            return response()->json([
+                'message' => 'Video uploaded successfully',
+                'video' => $video
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Video upload failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+      // Existing helper method...
+      private function getVideoDuration($videoFile)
+      {
+          // Placeholder for video duration calculation
+          return 0;
+      }
 
 
 }

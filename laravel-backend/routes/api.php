@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum','role:student'])->group(function(){
     Route::get('/get-auth-user', [AuthController::class, 'getProfile']);
     Route::post('/start-lecture', [TDCOnlineController::class, 'startExam']);
     Route::post('/update-account', [TDCOnlineController::class, 'updateAccount']);
+    Route::post('/saved-score-session1', [TDCOnlineController::class, 'saveQuizScore']);
 });
 
 
@@ -58,6 +59,9 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     // Get all 
     Route::get('/getAdmin', [AuthController::class, 'getAdmin']);
     Route::get('/get-users',[AdminController::class, 'getAllUsers'] );
+
+    //Upload Video
+    Route::post('/upload-video', [AdminController::class, 'uploadVideo']);
 
     //courses api routes
     Route::get('/get-course', [AdminController::class, 'getAllCourse']);
@@ -72,5 +76,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('/booking-enrollment/{id}/approve', [AdminController::class, 'approveBookingEnrollment']);
     Route::post('/booking-enrollment/{id}/reject', [AdminController::class, 'rejectBookingEnrollment']);
 
+    //User 
     Route::post('/create-user-credentials/{id}',[AdminController::class, 'generateUserCrendetials']);
 });
