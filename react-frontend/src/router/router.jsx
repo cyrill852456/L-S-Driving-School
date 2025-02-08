@@ -27,6 +27,12 @@ import VideoSection from "@/Pages/ClientPage/TDC/SessionsTwo/VideoSectionSession
 import PowerPointSession2 from "@/Pages/ClientPage/TDC/SessionsTwo/PowerPointSessionTwo";
 import Session2QuizSection from '@/Pages/ClientPage/TDC/SessionsTwo/Session2QuizSection';
 import Finalization from '@/Pages/ClientPage/Finalization';
+import StaffLayouts from "@/components/layouts/StaffLayouts";
+import path from "path";
+import StaffMain from "@/Pages/Staff/StaffMain";
+import InstructorLayouts from "@/components/layouts/InstructorLayouts";
+import InstructorMain from "@/Pages/Instructor/InstructorMain";
+import RecheduleMain from "@/Pages/Staff/RecheduleMain";
 const router = createBrowserRouter([
    
     {
@@ -153,6 +159,38 @@ const router = createBrowserRouter([
             }
         ]
 
+    },
+
+    /**
+     * Staff Layouts & Routes
+     */
+    {
+        path: '/l&sStaff',
+        element: <StaffLayouts />,
+        children:[
+            {
+                path: 'StaffMain',
+                element: <StaffMain />
+            },
+            {
+                path: 'RescheduleClient',
+                element: <RecheduleMain />
+            }
+              
+        ]
+    },
+    /**
+     * Instructor Layouts & Routes
+     */
+    {
+        path: '/L&SInstructors',
+        element: <InstructorLayouts />,
+        children:[
+            {
+                index: true,
+                element: <InstructorMain />
+            }
+        ]
     }
 
 ]);

@@ -180,7 +180,9 @@ class TDCOnlineController extends Controller
     }
 
 
-
+    /**
+     * Function to Saved Session 2 Exam Score Result
+     */
     public function saveSession2ExamScore(Request $request)
     {
         try {
@@ -228,7 +230,9 @@ class TDCOnlineController extends Controller
         }
     }
 
-    // update status Session2 
+    /**
+     * Update Student Status Session Two If the user finished or failed the exam
+     */
     public function SessionTwoStatus(){
 
         $user = Auth::user();
@@ -263,7 +267,9 @@ class TDCOnlineController extends Controller
     }
 
 
-    // get all the scores
+    /**
+     * Function to get Session 1 current student score
+     */
     public function getSessionOneScore()
     {
         try {
@@ -302,6 +308,9 @@ class TDCOnlineController extends Controller
         }
     }
 
+    /**
+     * Function to get Sessio 2 current Student Score
+     */
     public function getSessionTwoScore()
     {
         try {
@@ -330,6 +339,9 @@ class TDCOnlineController extends Controller
         }
     }
 
+    /**
+     * Function to calculate overall Session 1 and Session 2 score
+     */
    public function getTotalScore()
 {
     try {

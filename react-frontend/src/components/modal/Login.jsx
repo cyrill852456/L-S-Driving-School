@@ -38,6 +38,10 @@ const Login = () => {
           navigate('/authadmin');
         } else if (response.user.role === 'student') {
           navigate('/authstudent');
+        } else if (response.user.role === 'staff'){
+          navigate('/l&sStaff');
+        } else if (response.user.role === 'instructor'){
+          navigate('/L&SInstructors');
         }
       }
     } catch (error) {

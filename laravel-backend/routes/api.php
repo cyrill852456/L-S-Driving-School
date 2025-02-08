@@ -8,6 +8,7 @@ use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingEnrollmentController;
 use App\Http\Controllers\TDCOnlineController;
+use App\Http\Controllers\StaffController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -90,4 +91,9 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
     //User 
     Route::post('/create-user-credentials/{id}',[AdminController::class, 'generateUserCrendetials']);
+});
+
+Route::middleware(['auth:sanctum', 'role:staff'])->group(function(){
+    Route::put('/staff/reschedule-booking/{id}', [StaffController::class, 'rescheduleBooking']);
+    Route::get('/staff/booking-requests', [StaffController::class,'getBookingEnrollRequest']);
 });
